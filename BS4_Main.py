@@ -2,9 +2,9 @@
 Uses package BeautifulSoup4 to webscrape Purdue math class pages
 for lecture information.
 
-Created: Saturday September 17, 2022
+Created: Saturday, September 17, 2022
 
-@author: Mary V(mvoorhe), Caitlin Wilson (Caitlin-Wilson-8642), Lexi Ogrinz (AOgrinz-pixel)
+@author: Mary V (mvoorhe), Caitlin Wilson (Caitlin-Wilson-8642), Lexi Ogrinz (AOgrinz-pixel)
 
 """
 
@@ -22,12 +22,23 @@ links = soup.find_all("a")
 for link in links:
     if "MA " + keyword in link.text:
         class_url = link.attrs['href']
-        print(class_url)
+        # print(class_url)
 
 class_page = requests.get("https://www.math.purdue.edu/academic/courses/" + class_url)
-print(class_page)
+# print(class_page)
 
-# src = class_page.content
-# class_soup = BeautifulSoup(src, 'lxml')
-# print(class_soup)
+src = class_page.content
+class_soup = BeautifulSoup(src, 'lxml')
+
+teacher_preference = input("Do you have a preference on who teaches the class?\n")
+teacher_preference.lower()
+if teacher_preference == "yes":
+    prof_name = input("What is the teacher's last name?\n")
+
+
+day_preference = input("Do you care about what days the class is held on?\n")
+day_preference.lower()
+if day_preference == "yes":
+    day = input("What day(s) do you want (separate with commas)?\n")
+
 
