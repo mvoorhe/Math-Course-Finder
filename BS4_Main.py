@@ -35,6 +35,10 @@ teacher_preference.lower()
 if teacher_preference == "yes":
     prof_name = input("What is the teacher's last name?\n")
 
+prof_links = class_soup.find_all("a")
+for prof_link in prof_links:
+    if prof_name in prof_link.text:
+        print(prof_link.parent.parent)
 
 day_preference = input("Do you care about what days the class is held on?\n")
 day_preference.lower()
