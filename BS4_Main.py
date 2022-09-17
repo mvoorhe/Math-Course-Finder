@@ -1,6 +1,6 @@
 """
-Uses package BeautifulSoup4 to webscrape airline websites
-for flight prices.
+Uses package BeautifulSoup4 to webscrape Purdue math class pages
+for lecture information.
 
 Created: Saturday September 17, 2022
 
@@ -11,17 +11,23 @@ Created: Saturday September 17, 2022
 import requests
 from bs4 import BeautifulSoup
 
-# object that is appended to the BoilerLink website to narrow the search
-keyword = input("What club or hobby are you interested in?\n")
+main_page = requests.get("https://www.math.purdue.edu/academic/courses/")
 
-# object for website after keyword filters all clubs
-filtered_page = requests.get("https://boilerlink.purdue.edu/organizations?query=" + keyword)
+keyword = input("What math class are you looking for (5 digit number)?\n")
 
-# full html content of filtered_page
-src = filtered_page.content
-# object that stores new BS object
+src = main_page.content
 soup = BeautifulSoup(src, 'lxml')
 
+links = soup.find_all("a")
+for link in links:
+    if "MA " + keyword in link.text:
+        class_url = link.attrs['href']
+        print(class_url)
 
+class_page = requests.get("https://www.math.purdue.edu/academic/courses/" + class_url)
+print(class_page)
 
+# src = class_page.content
+# class_soup = BeautifulSoup(src, 'lxml')
+# print(class_soup)
 
