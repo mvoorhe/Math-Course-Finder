@@ -1,2 +1,3 @@
 # urban-spoon
-Program that implements a web-scraper to search airline websites for flight prices and returns the options starting with the cheapest.
+Program that implements a web-scraper to search boilerlink club events and create a calander to remind the user of events and conflicts
+
