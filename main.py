@@ -1,14 +1,14 @@
 from fastapi import FastAPI
-from scraper import Scraper
+from scraper import Math
 
 
 app = FastAPI()
-quotes = Scraper()
+mathClasses = Math()
 
 
-@app.get("/{cat}")
-async def read_item(cat):
-    return quotes.scrapdata(cat)
+@app.get("/{maclass}/{professor}/{weekday}")
+async def read_item(maclass, professor, weekday):
+    return mathClasses.findclass(maclass, professor, weekday)
 
 
 
