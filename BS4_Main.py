@@ -56,8 +56,9 @@ if prof_name != "none":
         if prof_name in prof_classes.text:
             if days != "none":                                      # checks if there was a weekday input
                 for available_days in prof_classes.parent.parent:
+
                     if days in available_days.text:
-                        # print(available_days.parent)
+                        print(available_days.parent)
                         for times in available_days.parent:         # finds the time in the td tag
                             if ":" in times.text:
                                 print(times.text)
@@ -68,6 +69,7 @@ if prof_name != "none":
                     if ":" in times.text:
                         print(times.text)
                         print(times.previous_sibling.previous_sibling.text)             # prints room information
+                        print(times.next_sibling.next_sibling.text)                     # prints weekday information
 elif prof_name == "none" and days != "none":                        # checks if there was NOT a professor input
     day_tags = class_soup.find_all("td")
     for available_days in day_tags:
@@ -77,6 +79,7 @@ elif prof_name == "none" and days != "none":                        # checks if 
                 if ":" in times.text:
                     print(times.text)
                     print(times.previous_sibling.previous_sibling.text)                 # prints room information
+                    print(times.next_sibling.next_sibling.next_sibling.next_sibling.text)       # prints professor name
 else:
     table = class_soup.find("table", {"class": "table table-condensed"})
     table_rows = table.find("tbody")
@@ -86,3 +89,5 @@ else:
         if ":" in times.text:
             print(times.text)
             print(times.previous_sibling.previous_sibling.text)                        # prints room information
+            print(times.next_sibling.next_sibling.text)                                # prints weekday information
+            print(times.next_sibling.next_sibling.next_sibling.next_sibling.text)      # prints professor name
