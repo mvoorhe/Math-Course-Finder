@@ -1,0 +1,54 @@
+body{
+    background-color:silver;
+}
+h1{
+    text-align: center;
+    color: black;
+    text-justify: auto;
+}
+.intro{
+    padding: 30px;
+    border: 10px;
+    border-width: 5px;
+    border-color: black;
+    border-style: solid;
+    text-align: center;
+    font-size: larger;
+    background-color: lightgoldenrodyellow;
+    margin-bottom: 30px;
+
+}
+.input{
+    padding: 30px;
+    border: 10px;
+    border-width: 5px;
+    border-color: black;
+    border-style: solid;
+    text-align: center;
+    font-size: larger;
+    background-color: lightgoldenrodyellow;
+    margin-bottom: 30px;
+}
+#inputs{
+    padding: 30px;
+    border-width: 0px, 10px, 10px, 10px;
+    border-color: black;
+    border-style: solid;
+    text-align: left;
+    font-size: larger;
+    background-color: lightgoldenrodyellow;
+}
+a {
+    padding: 30px;
+    border: 10px;
+    margin-top: 20px;
+    position: relative;
+    bottom: 170px;
+    left: 1000px;
+    color: black;
+    border-width: 5px;
+    border-color: black;
+    border-style: solid;
+    font-size: larger;
+    background-color: lightgray;
+}
