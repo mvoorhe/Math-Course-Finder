@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<link rel="stylesheet" href="C:\Users\alexi\Code\Website\MathCourseFiner.css">
+<html>
+<body>
+
+<h1>Welcome to the Purdue Math Course Helper! </h1>
+<div class="intro">
+    <p>We understand that math can be overwhemling and often hard to manage. Tt can feel like you're being left behind even if you only missed one class.</p>
+    <p>That's why this website exists to help you keep track of all available math lectures for your class.</p>
+    <h3>Missing a class for a club? Slept through an early class? Simply need a new perspective? </h3>
+<p>Then come check out our website!</p>
+</div>
+<div class = "input">
+    <p>First, we'll need some information. Don't worry, we won't sell your data--promise! :)</p>
+    <h3>Please read this before continuing!</h3>
+        <p>Please enter your class number into the box below. For example, if you're in Calc 3 type in 26100.</p> 
+        <p>Then put in your preferred professors name, make sure to capitalize! If you don't prefer a professor, please write "none".</p>
+        <p>Finally type in your preferred days of the week as "mwf" for Monday-Wednesday-Friday or "tr" for Tuesday-Thursday classes.</p>
+
+<div id ="inputs">
+        <h4>Don't forget to press submit when you are done!</h4>
+        <h5>The link will appear next to this box!</h5>
+
+    <form>
+        Class: <input type="text" name="fname" id="mclass"><br>
+        Professor: <input type="text" name="fname" id="prof"><br>
+        Days of the Week: <input type="text" name="fname" id="weekday"><br>
+        <input type="button" onclick= "myFunction()" value="Submit">
+    </form>
+
+    <script>
+        function myFunction() {
+          var mclass = document.getElementById("mclass");
+          var mclassString = "";
+          mclassString = mclass.value;
+
+          var mweekday = document.getElementById("weekday");
+          var mweekdayString = "";
+          mweekdayString = mweekday.value;
+
+          var mprof = document.getElementById("prof");
+          var mprofString = "";
+          mprofString = mprof.value
+            var a = document.createElement('a'); 
+            var link = document.createTextNode("See list of available classes: ");
+            a.appendChild(link);  
+            a.title = "See list of available classes: "; 
+            a.href = "http://127.0.0.1:8000/" + mclassString + "/" + mprofString + "/" + mweekdayString; //that has to be the linkylink for
+            document.body.appendChild(a); 
+        }
+    </script>
+</div>
+</div>
+    
+    
+</div>
+
+</body>
+</html>
