@@ -4,7 +4,7 @@ for lecture information.
 Created: Saturday, September 17, 2022
 @author: Mary V (mvoorhe), Caitlin Wilson (Caitlin-Wilson-8642), Lexi Ogrinz (AOgrinz-pixel)
 """
-
+import numpy
 import requests
 from bs4 import BeautifulSoup
 from array import *
@@ -32,6 +32,7 @@ for link in links:
 class_page = requests.get("https://www.math.purdue.edu/academic/courses/" + class_url)
 src = class_page.content
 class_soup = BeautifulSoup(src, 'lxml')
+
 
 # Finds class information for classes taught by
 # user-inputted teacher
@@ -65,12 +66,31 @@ if prof_name != "none":
             times = []
             if days != "none":                                      # checks if there was a weekday input
                 for available_days in courseObj:
-                    if days in available_days.text:
+                    # For loop to check days
+                    days.upper()
+                    arrDays = []
+                    for element in range(0, len(days)):
+                        if days[element] in available_days.text:
+                            for times in available_days.parent:
+                                if ":" in times.text:
+                                    print(times.text)
+                                    roomNum = times.previous_sibling.previous_sibling.text
+                                    print(roomNum)
+                                    tempArr = [courseName, profNameForArray, available_days.text, times.text, roomNum]
+                                    arrDays.append(tempArr)
+                  #  for a in arrDays:
+                     # for b in range(len(arrDays) - 1):
+                         # if not (numpy.array_equal(arrDays[a], arrDays[b], equal_nan=False)):
+
+
+                    if days in available_days.text:  # Days is user input
                         # Print(available_days.parent)
                         for times in available_days.parent:
                             if ":" in times.text:
                                 print(times.text)
-                                tempArr = [courseName, profNameForArray, available_days.text, times.text]
+                                roomNum = times.previous_sibling.previous_sibling.text
+                                print(roomNum)
+                                tempArr = [courseName, profNameForArray, available_days.text, times.text, roomNum]
                                 filteredClasses.append(tempArr)  # Preference for professor and days
 
             else:  # Preference for professor but not days
@@ -78,7 +98,9 @@ if prof_name != "none":
                 for times in courseObj:
                     if ":" in times.text:
                         print(times.text)
-                        tempArr = [courseName, profNameForArray, times.text]
+                        roomNum = times.previous_sibling.previous_sibling.text
+                        print(roomNum)
+                        tempArr = [courseName, profNameForArray, times.text, roomNum]
                         filteredClasses.append(tempArr)
 
 elif prof_name == "none" and days != "none":  # No preferred professor, but a preferred date
@@ -89,7 +111,9 @@ elif prof_name == "none" and days != "none":  # No preferred professor, but a pr
             for times in available_days.parent:
                 if ":" in times.text:
                     print(times.text)
-                    tempArr = [courseName, available_days.text, times.text]
+                    roomNum = times.previous_sibling.previous_sibling.text
+                    print(roomNum)
+                    tempArr = [courseName, available_days.text, times.text, roomNum]
                     filteredClasses.append(tempArr)
 
 else:  # No preferred Professor or Date
@@ -100,7 +124,9 @@ else:  # No preferred Professor or Date
     for times in table_data:
         if ":" in times.text:
             print(times.text)
-            tempArr = [courseName, times.text]
+            roomNum = times.previous_sibling.previous_sibling.text
+            print(roomNum)
+            tempArr = [courseName, times.text, roomNum]
             filteredClasses.append(tempArr)
 
 print(filteredClasses)
