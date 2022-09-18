@@ -37,6 +37,7 @@ teacher_preference = input("Do you have a preference on who teaches the class?\n
 if teacher_preference == "yes":
     prof_name = input("What is the teacher's last name?\n").capitalize()
 
+
 # Finds class information for classes that occur
 # on specific days of the week
 days = "none"
@@ -44,10 +45,6 @@ days = "none"
 day_preference = input("Do you care about what days the class is held on?\n").lower()
 if day_preference == "yes":
     days = input("What day(s) do you want (single letter representation)?\n").upper()
-
-
-# Objects that will help return class times
-
 
 
 # Returning table data sets according
@@ -60,29 +57,32 @@ if prof_name != "none":
             if days != "none":                                      # checks if there was a weekday input
                 for available_days in prof_classes.parent.parent:
                     if days in available_days.text:
-                        #print(available_days.parent)
-                        for times in available_days.parent:
+                        # print(available_days.parent)
+                        for times in available_days.parent:         # finds the time in the td tag
                             if ":" in times.text:
                                 print(times.text)
+                                print(times.previous_sibling.previous_sibling.text)     # prints room information
             else:
-                #print(prof_classes.parent.parent)
-                for times in prof_classes.parent.parent:
+                # print(prof_classes.parent.parent)
+                for times in prof_classes.parent.parent:            # finds the time in the td tag
                     if ":" in times.text:
                         print(times.text)
-elif prof_name == "none" and days != "none":                        # checks if there was NOT a professor
+                        print(times.previous_sibling.previous_sibling.text)             # prints room information
+elif prof_name == "none" and days != "none":                        # checks if there was NOT a professor input
     day_tags = class_soup.find_all("td")
     for available_days in day_tags:
         if days in available_days.text:
-            #print(available_days.parent)
-            for times in available_days.parent:
+            # print(available_days.parent)
+            for times in available_days.parent:                     # finds the time in the td tag
                 if ":" in times.text:
                     print(times.text)
+                    print(times.previous_sibling.previous_sibling.text)                 # prints room information
 else:
     table = class_soup.find("table", {"class": "table table-condensed"})
     table_rows = table.find("tbody")
     table_data = table_rows.find_all("td")
     # print(table_data)
-    for times in table_data:
+    for times in table_data:                                        # finds the time in the td tag
         if ":" in times.text:
             print(times.text)
-
+            print(times.previous_sibling.previous_sibling.text)                        # prints room information
