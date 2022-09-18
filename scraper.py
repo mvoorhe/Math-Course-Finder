@@ -101,5 +101,4 @@ class Math():
 
         return filteredClasses
 
-test = Math()
-print(test.findclass("16200", "Chen", "none"))
+
