@@ -45,6 +45,11 @@ day_preference = input("Do you care about what days the class is held on?\n").lo
 if day_preference == "yes":
     days = input("What day(s) do you want (single letter representation)?\n").upper()
 
+
+# Objects that will help return class times
+
+
+
 # Returning table data sets according
 # to user input
 
@@ -55,14 +60,29 @@ if prof_name != "none":
             if days != "none":                                      # checks if there was a weekday input
                 for available_days in prof_classes.parent.parent:
                     if days in available_days.text:
-                        print(available_days.parent)
+                        #print(available_days.parent)
+                        for times in available_days.parent:
+                            if ":" in times.text:
+                                print(times.text)
             else:
-                print(prof_classes.parent.parent)
+                #print(prof_classes.parent.parent)
+                for times in prof_classes.parent.parent:
+                    if ":" in times.text:
+                        print(times.text)
 elif prof_name == "none" and days != "none":                        # checks if there was NOT a professor
     day_tags = class_soup.find_all("td")
     for available_days in day_tags:
         if days in available_days.text:
-            print(available_days.parent)
+            #print(available_days.parent)
+            for times in available_days.parent:
+                if ":" in times.text:
+                    print(times.text)
 else:
-    table_rows = class_soup.find("table", {"class": "table table-condensed"})
-    print(table_rows)
+    table = class_soup.find("table", {"class": "table table-condensed"})
+    table_rows = table.find("tbody")
+    table_data = table_rows.find_all("td")
+    # print(table_data)
+    for times in table_data:
+        if ":" in times.text:
+            print(times.text)
+
